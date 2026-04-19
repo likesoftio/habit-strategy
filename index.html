@@ -49,12 +49,12 @@
   .slide-content { position: relative; z-index: 1; max-width: 1200px; width: 100%; margin: 0 auto; }
 
   .slide-num {
-    position: absolute; top: 3vh; right: 4vw;
+    position: absolute; top: 60px; right: 4vw;
     font-family: 'Space Grotesk', monospace;
     font-size: 14px; color: var(--muted); letter-spacing: 0.15em; z-index: 3;
   }
   .brand {
-    position: absolute; top: 3vh; left: 4vw;
+    position: absolute; top: 62px; left: 4vw;
     font-family: 'Space Grotesk', monospace;
     font-size: 12px; color: var(--muted); letter-spacing: 0.3em;
     text-transform: uppercase; z-index: 3;
@@ -178,58 +178,58 @@
     border-radius: 3px; letter-spacing: 0.05em;
   }
 
-  /* Phase header */
-  .phase-tag {
-    display: inline-block;
-    font-family: 'Space Grotesk', monospace;
-    font-size: 12px; color: #fff;
-    background: var(--porsche-red);
-    padding: 6px 12px; letter-spacing: 0.2em;
-    text-transform: uppercase; margin-bottom: 18px; font-weight: 700;
+  /* Phase slide layout */
+  .phase-slide h2 {
+    font-size: clamp(28px, 4.2vw, 56px);
+    margin-bottom: 16px;
+  }
+  .phase-slide .lead {
+    font-size: clamp(15px, 1.3vw, 19px);
+    margin-bottom: 14px; max-width: 920px;
   }
   .phase-goal {
     background: rgba(255,255,255,0.05);
     border-left: 3px solid var(--porsche-red);
-    padding: 16px 22px; margin: 24px 0;
-    font-size: clamp(15px, 1.3vw, 19px); color: #e0e0e0;
+    padding: 12px 18px; margin: 14px 0 16px;
+    font-size: clamp(14px, 1.1vw, 16px); color: #e0e0e0;
   }
   .phase-goal .lbl {
     font-family: 'Space Grotesk', monospace;
-    font-size: 11px; color: var(--porsche-red);
+    font-size: 10px; color: var(--porsche-red);
     letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 6px; font-weight: 600;
+    margin-bottom: 4px; font-weight: 600; display: block;
   }
 
   /* Add list inside phase */
   .adds {
     display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 14px; margin-top: 20px;
+    gap: 10px; margin-top: 12px;
   }
   .add-item {
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.08);
-    padding: 18px 20px; border-radius: 4px;
+    padding: 12px 16px; border-radius: 4px;
   }
   .add-item .name {
-    font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px;
+    font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px;
   }
   .add-item .when {
-    font-size: 13px; color: #bbb; margin-bottom: 6px;
+    font-size: 12px; color: #bbb; margin-bottom: 4px; line-height: 1.4;
   }
   .add-item .when b, .add-item .how b {
     color: var(--porsche-red); font-family: 'Space Grotesk', monospace;
-    font-weight: 600; font-size: 11px; letter-spacing: 0.1em;
+    font-weight: 600; font-size: 10px; letter-spacing: 0.1em;
     text-transform: uppercase; display: inline-block; margin-right: 4px;
   }
-  .add-item .how { font-size: 13px; color: #ccc; line-height: 1.45; }
+  .add-item .how { font-size: 12px; color: #ccc; line-height: 1.4; }
 
   .success {
-    margin-top: 22px; padding: 14px 18px;
+    margin-top: 14px; padding: 10px 16px;
     background: rgba(213,0,28,0.08);
     border: 1px solid rgba(213,0,28,0.3);
-    font-size: 14px; color: #f0f0f0;
+    font-size: 13px; color: #f0f0f0;
   }
-  .success b { color: var(--porsche-red); margin-right: 6px; }
+  .success b { color: var(--porsche-red); margin-right: 6px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
 
   /* Set & forget */
   .sf-grid {
@@ -338,12 +338,7 @@
     box-shadow: 0 0 12px var(--porsche-red);
   }
 
-  .hint {
-    position: fixed; bottom: 90px; right: 30px;
-    font-family: 'Space Grotesk', monospace;
-    font-size: 11px; color: var(--muted);
-    letter-spacing: 0.1em; z-index: 50; opacity: 0.6;
-  }
+  .hint { display: none; }
   kbd {
     background: rgba(255,255,255,0.1);
     padding: 2px 6px; border-radius: 3px;
@@ -351,11 +346,11 @@
   }
 
   .pdf-btn {
-    position: fixed; top: 20px; right: 20px;
+    position: fixed; top: 14px; right: 14px;
     background: var(--porsche-red); color: white;
-    border: none; padding: 10px 18px; border-radius: 100px;
+    border: none; padding: 7px 14px; border-radius: 100px;
     font-family: 'Space Grotesk', monospace;
-    font-size: 11px; font-weight: 600;
+    font-size: 10px; font-weight: 600;
     letter-spacing: 0.2em; text-transform: uppercase;
     cursor: pointer; z-index: 100; transition: all 0.2s;
     box-shadow: 0 4px 20px rgba(213,0,28,0.4);
@@ -363,10 +358,10 @@
   .pdf-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(213,0,28,0.6); }
 
   .home-btn {
-    position: fixed; top: 20px; left: 20px;
+    position: fixed; top: 14px; left: 14px;
     background: rgba(0,0,0,0.5); color: var(--text);
     border: 1px solid rgba(255,255,255,0.15);
-    padding: 8px 14px; border-radius: 100px;
+    padding: 7px 14px; border-radius: 100px;
     font-family: 'Space Grotesk', monospace;
     font-size: 10px; font-weight: 600;
     letter-spacing: 0.2em; text-transform: uppercase;
@@ -417,7 +412,7 @@
 <div class="deck" id="deck">
 
   <!-- 01 / Title -->
-  <section class="slide active title-slide" style="background-image: url('https://images.unsplash.com/photo-1517438476312-10d79c077509?w=1920&q=80')">
+  <section class="slide active title-slide" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=80')">
     <div class="brand">INKTECH · PERSONAL OS</div>
     <div class="slide-num">01 / 16</div>
     <div class="slide-content">
@@ -545,11 +540,10 @@
   </section>
 
   <!-- 08 / Phase 1 -->
-  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&q=80')">
+  <section class="slide phase-slide" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&q=80')">
     <div class="brand">ФАЗА 1 · НЕДЕЛИ 1–4</div>
     <div class="slide-num">08 / 16</div>
     <div class="slide-content">
-      <span class="phase-tag">Фаза 1 · нед 1–4</span>
       <h2>Утренний <span class="accent">фундамент</span></h2>
       <p class="lead">Keystone-ритуал, на котором держится всё остальное. Если эта фаза закрепится — следующие пойдут в 3 раза легче.</p>
       <div class="phase-goal">
@@ -583,11 +577,10 @@
   </section>
 
   <!-- 09 / Phase 2 -->
-  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1920&q=80')">
+  <section class="slide phase-slide" style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1920&q=80')">
     <div class="brand">ФАЗА 2 · НЕДЕЛИ 5–8</div>
     <div class="slide-num">09 / 16</div>
     <div class="slide-content">
-      <span class="phase-tag">Фаза 2 · нед 5–8</span>
       <h2>Глубокая работа <span class="accent">и тело</span></h2>
       <p class="lead">Нагрузка на энергию растёт — поэтому фундамент фазы 1 нужен первым. Добавляем три тяжёлых практики и убираем один ухудшающий фактор.</p>
       <div class="phase-goal">
@@ -621,11 +614,10 @@
   </section>
 
   <!-- 10 / Phase 3 -->
-  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1920&q=80')">
+  <section class="slide phase-slide" style="background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1920&q=80')">
     <div class="brand">ФАЗА 3 · НЕДЕЛИ 9–12</div>
     <div class="slide-num">10 / 16</div>
     <div class="slide-content">
-      <span class="phase-tag">Фаза 3 · нед 9–12</span>
       <h2>Социальное <span class="accent">и культурное</span></h2>
       <p class="lead">Когда тело и работа стабилизированы — наращиваем жизнь вне работы. Эти привычки нельзя добавлять раньше: они требуют свободного ресурса.</p>
       <div class="phase-goal">
@@ -659,11 +651,10 @@
   </section>
 
   <!-- 11 / Phase 4 -->
-  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1521119989659-a83eee488004?w=1920&q=80')">
+  <section class="slide phase-slide" style="background-image: url('https://images.unsplash.com/photo-1521119989659-a83eee488004?w=1920&q=80')">
     <div class="brand">ФАЗА 4 · НЕДЕЛИ 13–16</div>
     <div class="slide-num">11 / 16</div>
     <div class="slide-content">
-      <span class="phase-tag">Фаза 4 · нед 13–16</span>
       <h2>Кофе и <span class="accent">нетворкинг</span></h2>
       <p class="lead">Закрываем две самые тяжёлые привычки: отказ от кофе и активный нетворкинг. Обе требуют ресурса, которого в начале нет.</p>
       <div class="phase-goal">
