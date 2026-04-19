@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17 ритуалов за 16 недель</title>
+<meta name="description" content="Habit stacking, keystone-привычки, 4 фазы внедрения. Стратегия, а не сила воли.">
+<meta property="og:title" content="17 ритуалов за 16 недель">
+<meta property="og:description" content="Стратегия внедрения 17 привычек за 16 недель. Без героизма.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --porsche-red: #D5001C;
+    --porsche-dark: #0a0a0a;
+    --porsche-gray: #1a1a1a;
+    --text: #f5f5f5;
+    --muted: #888;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5vw 7vw;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.6s ease;
+    background-size: cover; background-position: center;
+    background-color: #000;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
+  .slide::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 50%, rgba(20,0,0,0.8) 100%);
+    z-index: 0;
+  }
+  .slide-content { position: relative; z-index: 1; max-width: 1200px; width: 100%; margin: 0 auto; }
+
+  .slide-num {
+    position: absolute; top: 3vh; right: 4vw;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 14px; color: var(--muted); letter-spacing: 0.15em; z-index: 3;
+  }
+  .brand {
+    position: absolute; top: 3vh; left: 4vw;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 12px; color: var(--muted); letter-spacing: 0.3em;
+    text-transform: uppercase; z-index: 3;
+  }
+  .brand::before {
+    content: ''; display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--porsche-red);
+    margin-right: 10px; vertical-align: middle;
+    border-radius: 50%; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  h1 {
+    font-size: clamp(40px, 7vw, 110px); font-weight: 900;
+    line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 30px;
+  }
+  h2 {
+    font-size: clamp(32px, 5vw, 72px); font-weight: 800;
+    line-height: 1; letter-spacing: -0.02em; margin-bottom: 40px;
+  }
+  h3 {
+    font-size: clamp(22px, 2.5vw, 34px); font-weight: 700;
+    margin-bottom: 20px; letter-spacing: -0.01em;
+  }
+
+  .accent { color: var(--porsche-red); }
+
+  .eyebrow {
+    font-family: 'Space Grotesk', monospace;
+    font-size: clamp(11px, 1vw, 14px);
+    color: var(--porsche-red); letter-spacing: 0.3em;
+    text-transform: uppercase; margin-bottom: 24px; font-weight: 600;
+  }
+
+  p {
+    font-size: clamp(16px, 1.4vw, 22px);
+    line-height: 1.5; color: #ddd; max-width: 780px;
+  }
+
+  .lead {
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.4; color: #e8e8e8; font-weight: 300;
+  }
+
+  /* Title */
+  .title-slide .slide-content { text-align: left; }
+  .title-slide .stripe { width: 60px; height: 4px; background: var(--porsche-red); margin-bottom: 30px; }
+  .title-slide .sub {
+    font-size: clamp(18px, 1.6vw, 24px); color: #bbb;
+    margin-top: 30px; font-weight: 300; max-width: 680px;
+  }
+  .title-slide .meta {
+    position: absolute; bottom: 5vh; left: 7vw;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 13px; color: var(--muted); letter-spacing: 0.15em;
+  }
+
+  /* Stats */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 30px; margin-top: 50px;
+  }
+  .stat { border-top: 2px solid var(--porsche-red); padding-top: 20px; }
+  .stat .val {
+    font-family: 'Space Grotesk', monospace;
+    font-size: clamp(36px, 4.5vw, 64px);
+    font-weight: 700; line-height: 1; margin-bottom: 10px;
+  }
+  .stat .label {
+    font-size: 13px; color: #aaa;
+    text-transform: uppercase; letter-spacing: 0.15em;
+  }
+
+  /* Big quote */
+  .big-quote {
+    font-size: clamp(28px, 4vw, 56px);
+    line-height: 1.2; font-weight: 700;
+    letter-spacing: -0.02em; max-width: 1000px;
+  }
+  .big-quote .strike { text-decoration: line-through; color: #666; text-decoration-thickness: 3px; }
+
+  /* Principle slides */
+  .principle-num {
+    font-family: 'Space Grotesk', monospace;
+    font-size: clamp(80px, 12vw, 200px);
+    font-weight: 700; color: var(--porsche-red);
+    line-height: 0.9; margin-bottom: 10px; opacity: 0.95;
+  }
+
+  /* 3 columns of habits */
+  .cols-3 {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 30px;
+  }
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 28px 24px; border-radius: 4px;
+    position: relative; transition: all 0.3s ease;
+  }
+  .card .tag {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 11px; color: var(--porsche-red);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 14px; font-weight: 600;
+  }
+  .card h3 { font-size: clamp(20px, 1.8vw, 26px); margin-bottom: 14px; }
+  .card ul { list-style: none; margin-top: 8px; }
+  .card li {
+    font-size: 14px; line-height: 1.5; color: #ccc;
+    padding: 5px 0 5px 18px; position: relative;
+  }
+  .card li::before { content:'→'; position: absolute; left: 0; color: var(--porsche-red); }
+  .card li .ph {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 10px; color: var(--porsche-red);
+    margin-left: 6px; padding: 1px 5px;
+    border: 1px solid rgba(213,0,28,0.4);
+    border-radius: 3px; letter-spacing: 0.05em;
+  }
+
+  /* Phase header */
+  .phase-tag {
+    display: inline-block;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 12px; color: #fff;
+    background: var(--porsche-red);
+    padding: 6px 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; margin-bottom: 18px; font-weight: 700;
+  }
+  .phase-goal {
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid var(--porsche-red);
+    padding: 16px 22px; margin: 24px 0;
+    font-size: clamp(15px, 1.3vw, 19px); color: #e0e0e0;
+  }
+  .phase-goal .lbl {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 11px; color: var(--porsche-red);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 6px; font-weight: 600;
+  }
+
+  /* Add list inside phase */
+  .adds {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px; margin-top: 20px;
+  }
+  .add-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 18px 20px; border-radius: 4px;
+  }
+  .add-item .name {
+    font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px;
+  }
+  .add-item .when {
+    font-size: 13px; color: #bbb; margin-bottom: 6px;
+  }
+  .add-item .when b, .add-item .how b {
+    color: var(--porsche-red); font-family: 'Space Grotesk', monospace;
+    font-weight: 600; font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; display: inline-block; margin-right: 4px;
+  }
+  .add-item .how { font-size: 13px; color: #ccc; line-height: 1.45; }
+
+  .success {
+    margin-top: 22px; padding: 14px 18px;
+    background: rgba(213,0,28,0.08);
+    border: 1px solid rgba(213,0,28,0.3);
+    font-size: 14px; color: #f0f0f0;
+  }
+  .success b { color: var(--porsche-red); margin-right: 6px; }
+
+  /* Set & forget */
+  .sf-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 40px;
+  }
+  .sf-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 32px 28px;
+  }
+  .sf-card .icon-tag {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 11px; color: var(--porsche-red);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 12px; font-weight: 600;
+  }
+  .sf-card h3 { font-size: 26px; margin-bottom: 12px; }
+  .sf-card p { font-size: 15px; color: #ccc; }
+
+  /* Tracking & fails */
+  .two-cols {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 30px; margin-top: 30px;
+  }
+  .col-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 28px 26px;
+  }
+  .col-card h3 { font-size: 22px; margin-bottom: 16px; color: #fff; }
+  .col-card ul { list-style: none; }
+  .col-card li {
+    font-size: 15px; line-height: 1.6; color: #ddd;
+    padding: 6px 0 6px 18px; position: relative;
+  }
+  .col-card li::before { content: '→'; position: absolute; left: 0; color: var(--porsche-red); }
+
+  /* Honest warnings */
+  .warning-box {
+    background: rgba(213,0,28,0.06);
+    border: 1px solid rgba(213,0,28,0.35);
+    padding: 28px 32px; margin-top: 30px;
+  }
+  .warning-box h3 { color: var(--porsche-red); margin-bottom: 16px; }
+  .warning-box p { font-size: 15px; color: #ddd; margin-bottom: 14px; }
+  .warning-box p b { color: #fff; }
+
+  /* Timeline (phases overview if needed) */
+  .roadmap {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 14px; margin-top: 36px;
+  }
+  .road-step {
+    background: rgba(255,255,255,0.04);
+    border-top: 3px solid var(--porsche-red);
+    padding: 22px 20px;
+  }
+  .road-step .rs-num {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 13px; color: var(--porsche-red);
+    letter-spacing: 0.2em; margin-bottom: 8px; font-weight: 700;
+  }
+  .road-step h4 { font-size: 17px; margin-bottom: 8px; color: #fff; font-weight: 700; }
+  .road-step p { font-size: 13px; color: #bbb; line-height: 1.45; }
+
+  /* Final */
+  .final h1 { font-size: clamp(48px, 9vw, 140px); line-height: 0.9; }
+  .final .quote {
+    font-size: clamp(18px, 1.8vw, 26px);
+    color: #aaa; font-weight: 300;
+    margin-top: 40px; max-width: 700px;
+    line-height: 1.5; font-style: italic;
+  }
+
+  /* Navigation (same as discipline) */
+  .nav {
+    position: fixed; bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; align-items: center; gap: 20px; z-index: 100;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(20px);
+    padding: 10px 20px; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-btn {
+    background: none; border: none; color: var(--text);
+    cursor: pointer; width: 36px; height: 36px;
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; transition: all 0.2s; font-size: 18px;
+  }
+  .nav-btn:hover { background: var(--porsche-red); }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .nav-btn:disabled:hover { background: none; }
+  .dots { display: flex; gap: 6px; }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.3); cursor: pointer;
+    transition: all 0.3s;
+  }
+  .dot.active { background: var(--porsche-red); width: 24px; border-radius: 3px; }
+
+  .progress {
+    position: fixed; top: 0; left: 0;
+    height: 3px; background: var(--porsche-red);
+    z-index: 100; transition: width 0.4s ease;
+    box-shadow: 0 0 12px var(--porsche-red);
+  }
+
+  .hint {
+    position: fixed; bottom: 90px; right: 30px;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 0.1em; z-index: 50; opacity: 0.6;
+  }
+  kbd {
+    background: rgba(255,255,255,0.1);
+    padding: 2px 6px; border-radius: 3px;
+    margin: 0 2px; font-family: inherit;
+  }
+
+  .pdf-btn {
+    position: fixed; top: 20px; right: 20px;
+    background: var(--porsche-red); color: white;
+    border: none; padding: 10px 18px; border-radius: 100px;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; z-index: 100; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(213,0,28,0.4);
+  }
+  .pdf-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(213,0,28,0.6); }
+
+  .home-btn {
+    position: fixed; top: 20px; left: 20px;
+    background: rgba(0,0,0,0.5); color: var(--text);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 8px 14px; border-radius: 100px;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; z-index: 100; transition: all 0.2s;
+    text-decoration: none;
+  }
+  .home-btn:hover { border-color: var(--porsche-red); color: var(--porsche-red); }
+
+  @media print {
+    @page { size: A4 landscape; margin: 0; }
+    html, body {
+      overflow: visible !important; height: auto !important;
+      background: #000 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .deck { width: 100% !important; height: auto !important; overflow: visible !important; }
+    .slide {
+      position: relative !important;
+      width: 297mm !important; height: 210mm !important;
+      page-break-after: always !important; page-break-inside: avoid !important;
+      break-after: page !important;
+      opacity: 1 !important; pointer-events: auto !important;
+      display: flex !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .slide:last-child { page-break-after: auto !important; }
+    .slide::before { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .nav, .hint, .progress, .pdf-btn, .home-btn { display: none !important; }
+    h1 { font-size: 60pt !important; }
+    h2 { font-size: 36pt !important; }
+  }
+
+  @media (max-width: 768px) {
+    .cols-3, .adds, .sf-grid, .two-cols, .roadmap { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<a class="home-btn" href="https://likesoftio.github.io/" title="К списку презентаций">← HUB</a>
+<button class="pdf-btn" id="pdfBtn">↓ PDF</button>
+
+<div class="deck" id="deck">
+
+  <!-- 01 / Title -->
+  <section class="slide active title-slide" style="background-image: url('https://images.unsplash.com/photo-1517438476312-10d79c077509?w=1920&q=80')">
+    <div class="brand">INKTECH · PERSONAL OS</div>
+    <div class="slide-num">01 / 16</div>
+    <div class="slide-content">
+      <div class="stripe"></div>
+      <div class="eyebrow">ROUTINE ARCHITECTURE</div>
+      <h1>17 ритуалов <span class="accent">за 16 недель</span></h1>
+      <p class="sub">Не сила воли, а инженерная сборка. 4 волны по ~4 недели, каждая опирается на предыдущую.</p>
+      <div class="stats">
+        <div class="stat"><div class="val">4</div><div class="label">фазы</div></div>
+        <div class="stat"><div class="val">~16</div><div class="label">недель</div></div>
+        <div class="stat"><div class="val">17</div><div class="label">привычек</div></div>
+        <div class="stat"><div class="val">2</div><div class="label">set &amp; forget</div></div>
+      </div>
+    </div>
+    <div class="title-slide meta">911 / HABIT EDITION</div>
+  </section>
+
+  <!-- 02 / Problem -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1520975916090-3105956dac38?w=1920&q=80')">
+    <div class="brand">PROBLEM STATEMENT</div>
+    <div class="slide-num">02 / 16</div>
+    <div class="slide-content">
+      <div class="eyebrow">РАЗОЧАРУЮ СРАЗУ</div>
+      <div class="big-quote">
+        17 привычек одновременно — <span class="strike">возможно</span><br>
+        это <span class="accent">провал, доказанный наукой</span>.
+      </div>
+      <p style="margin-top: 36px;">Lally et al. (2010): закрепление одной привычки занимает в среднем 66 дней. Параллельный запуск 17 — это 17 одновременных конфликтов за внимание, время и энергию. Решение — не больше воли, а правильный <span class="accent">порядок</span>.</p>
+    </div>
+  </section>
+
+  <!-- 03 / Principle 1 -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1465446635226-de9bbf8ad987?w=1920&q=80')">
+    <div class="brand">PRINCIPLES · 01</div>
+    <div class="slide-num">03 / 16</div>
+    <div class="slide-content">
+      <div class="principle-num">01</div>
+      <div class="eyebrow">KEYSTONE HABITS</div>
+      <h2>Якорные привычки тянут <span class="accent">всё остальное</span></h2>
+      <p>Начинай с того, что меняет архитектуру дня — утренний ритуал классический keystone. Один час фундамента в день экономит десятки часов решений потом.</p>
+    </div>
+  </section>
+
+  <!-- 04 / Principle 2 -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1483706571354-e1ae8b7242bf?w=1920&q=80')">
+    <div class="brand">PRINCIPLES · 02</div>
+    <div class="slide-num">04 / 16</div>
+    <div class="slide-content">
+      <div class="principle-num">02</div>
+      <div class="eyebrow">HABIT STACKING</div>
+      <h2>Цепляй новое <span class="accent">к старому</span></h2>
+      <p>Формула: «После <b>X</b> я делаю <b>Y</b>». Не «утром медитирую», а «после того как умылся, сажусь медитировать на коврик у окна». Якорь — уже автоматическое действие. Работает мощнее любой мотивации.</p>
+    </div>
+  </section>
+
+  <!-- 05 / Principle 3 -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1920&q=80')">
+    <div class="brand">PRINCIPLES · 03</div>
+    <div class="slide-num">05 / 16</div>
+    <div class="slide-content">
+      <div class="principle-num">03</div>
+      <div class="eyebrow">IMPLEMENTATION INTENTIONS</div>
+      <h2>Конкретика удваивает <span class="accent">шанс действия</span></h2>
+      <p>«Когда <b>X</b>, в месте <b>Y</b>, я сделаю <b>Z</b>». Gollwitzer (1999): запись «бегаю по понедельникам и средам в 7:00 в парке» удваивает реальное выполнение по сравнению с «хочу бегать чаще». Размытое намерение — не намерение.</p>
+    </div>
+  </section>
+
+  <!-- 06 / Principle 4 -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=1920&q=80')">
+    <div class="brand">PRINCIPLES · 04</div>
+    <div class="slide-num">06 / 16</div>
+    <div class="slide-content">
+      <div class="principle-num">04</div>
+      <div class="eyebrow">IDENTITY &gt; OUTCOME</div>
+      <h2>Не «хочу бегать» — <span class="accent">«я тот, кто бегает»</span></h2>
+      <p>Цели колеблются с настроением. Идентичность — нет. Каждое выполненное действие — голос за того, кем ты становишься. Через 90 дней голосов накопится столько, что отказаться от привычки будет дороже, чем сделать.</p>
+    </div>
+  </section>
+
+  <!-- 07 / Map of 17 habits -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80')">
+    <div class="brand">МАРШРУТ</div>
+    <div class="slide-num">07 / 16</div>
+    <div class="slide-content">
+      <div class="eyebrow">17 ПРИВЫЧЕК · РАСПРЕДЕЛЕНИЕ</div>
+      <h2>Что и в какой <span class="accent">фазе</span></h2>
+      <div class="cols-3">
+        <div class="card">
+          <div class="tag">Ежедневные · 8</div>
+          <ul>
+            <li>Миниспорт утром <span class="ph">Ф1</span></li>
+            <li>Медитация 10 мин <span class="ph">Ф1</span></li>
+            <li>Планирование 10 мин <span class="ph">Ф1</span></li>
+            <li>Пить воду ~2 л <span class="ph">Ф1</span></li>
+            <li>300 г овощей <span class="ph">Ф1</span></li>
+            <li>3 часа на свой проект <span class="ph">Ф2</span></li>
+            <li>Отказ от кальяна <span class="ph">Ф2</span></li>
+            <li>Отказ от кофе <span class="ph">Ф4</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="tag">Еженедельные · 7</div>
+          <ul>
+            <li>Спорт 3×/нед <span class="ph">Ф2</span></li>
+            <li>Английский 2×/нед <span class="ph">Ф2</span></li>
+            <li>Чтение по будням <span class="ph">Ф3</span></li>
+            <li>Соц место раз/нед <span class="ph">Ф3</span></li>
+            <li>Вокал раз/нед <span class="ph">Ф3</span></li>
+            <li>Друзья раз/нед <span class="ph">Ф3</span></li>
+            <li>2 знакомства/нед <span class="ph">Ф4</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="tag">Set &amp; forget · 2</div>
+          <ul>
+            <li>Чекап раз в 6 мес <span class="ph">D1</span></li>
+            <li>Путешествие 2×/год <span class="ph">D1</span></li>
+          </ul>
+          <p style="margin-top:18px; font-size: 13px; color:#aaa; line-height:1.5;">
+            Не требуют ежедневной дисциплины. Поставь в календарь на день&nbsp;1 и забудь.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 / Phase 1 -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&q=80')">
+    <div class="brand">ФАЗА 1 · НЕДЕЛИ 1–4</div>
+    <div class="slide-num">08 / 16</div>
+    <div class="slide-content">
+      <span class="phase-tag">Фаза 1 · нед 1–4</span>
+      <h2>Утренний <span class="accent">фундамент</span></h2>
+      <p class="lead">Keystone-ритуал, на котором держится всё остальное. Если эта фаза закрепится — следующие пойдут в 3 раза легче.</p>
+      <div class="phase-goal">
+        <div class="lbl">Цель фазы</div>
+        Встроить утренний блок и пару фоновых привычек: подъём → миниспорт → медитация → планирование. Плюс вода и овощи.
+      </div>
+      <div class="adds">
+        <div class="add-item">
+          <div class="name">Миниспорт утром</div>
+          <div class="when"><b>Когда:</b> после подъёма, до душа</div>
+          <div class="how"><b>Как:</b> нед 1: 5 отжиманий + 10 приседаний. Нед 2–4: +планка. Цель — не нагрузка, а ритуал.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Медитация 10 мин</div>
+          <div class="when"><b>Когда:</b> после спорта, до завтрака</div>
+          <div class="how"><b>Как:</b> нед 1: 2 мин. Нед 2: 5 мин. Нед 3–4: 10 мин. App: Insight Timer / Headspace / Waking Up.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Планирование дня</div>
+          <div class="when"><b>Когда:</b> за чаем, после медитации</div>
+          <div class="how"><b>Как:</b> главная цель · 3 задачи · слот глубокой работы · что уберу, если не успею.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Вода + 300 г овощей</div>
+          <div class="when"><b>Когда:</b> бутылка на столе + овощи на обед/ужин</div>
+          <div class="how"><b>Как:</b> ~2 л воды/день. Овощи к каждому приёму — самая дешёвая интервенция в энергию и сон.</div>
+        </div>
+      </div>
+      <div class="success"><b>Критерий успеха:</b> через 4 недели утренний блок идёт автоматически, не требует решения «делать или нет».</div>
+    </div>
+  </section>
+
+  <!-- 09 / Phase 2 -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1920&q=80')">
+    <div class="brand">ФАЗА 2 · НЕДЕЛИ 5–8</div>
+    <div class="slide-num">09 / 16</div>
+    <div class="slide-content">
+      <span class="phase-tag">Фаза 2 · нед 5–8</span>
+      <h2>Глубокая работа <span class="accent">и тело</span></h2>
+      <p class="lead">Нагрузка на энергию растёт — поэтому фундамент фазы 1 нужен первым. Добавляем три тяжёлых практики и убираем один ухудшающий фактор.</p>
+      <div class="phase-goal">
+        <div class="lbl">Цель фазы</div>
+        Защищённый слот на свой проект, системный спорт, язык. Кальян — выкл.
+      </div>
+      <div class="adds">
+        <div class="add-item">
+          <div class="name">3 часа на свой проект</div>
+          <div class="when"><b>Когда:</b> защищённый слот в календаре, одно и то же время</div>
+          <div class="how"><b>Как:</b> при позиции head of platform 3ч/день сразу — нереалистично. Старт: 1ч × 5 дней, рост до 3ч × 4 дня. Слот: 07:00–10:00 или 20:00–23:00.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Спорт 3×/нед</div>
+          <div class="when"><b>Когда:</b> фикс. дни (пн/ср/пт), одно время</div>
+          <div class="how"><b>Как:</b> зал/бассейн/бег — что не отменяется из-за погоды или настроения. Абонемент с регулярными слотами с тренером.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Английский 2×/нед</div>
+          <div class="when"><b>Когда:</b> фикс. слоты с преподавателем</div>
+          <div class="how"><b>Как:</b> italki / Preply, 45–60 мин. Лучше утром до работы — меньше отменяется.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Отказ от кальяна</div>
+          <div class="when"><b>Когда:</b> постепенная редукция, 4 недели</div>
+          <div class="how"><b>Как:</b> нед 5: 1×/нед. Нед 6: 1×/2 нед. Нед 7: только в соц. поводах. Нед 8: 0.</div>
+        </div>
+      </div>
+      <div class="success"><b>Критерий успеха:</b> устойчивый слот на проект + 3 тренировки + 2 английских в неделю. Кальяна нет.</div>
+    </div>
+  </section>
+
+  <!-- 10 / Phase 3 -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1920&q=80')">
+    <div class="brand">ФАЗА 3 · НЕДЕЛИ 9–12</div>
+    <div class="slide-num">10 / 16</div>
+    <div class="slide-content">
+      <span class="phase-tag">Фаза 3 · нед 9–12</span>
+      <h2>Социальное <span class="accent">и культурное</span></h2>
+      <p class="lead">Когда тело и работа стабилизированы — наращиваем жизнь вне работы. Эти привычки нельзя добавлять раньше: они требуют свободного ресурса.</p>
+      <div class="phase-goal">
+        <div class="lbl">Цель фазы</div>
+        Четыре регулярных слота на чтение, культурное место, вокал, друзей. Все — с фикс. днём недели.
+      </div>
+      <div class="adds">
+        <div class="add-item">
+          <div class="name">Чтение 30 мин/день</div>
+          <div class="when"><b>Когда:</b> вечером перед сном вместо ленты</div>
+          <div class="how"><b>Как:</b> бумажная книга у кровати, телефон — в другой комнате. Один поток (не 5 параллельных), nonfiction + художка чередуются.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Соц место раз/нед</div>
+          <div class="when"><b>Когда:</b> фикс. день, например четверг вечер</div>
+          <div class="how"><b>Как:</b> коворкинг, бар, спорт-клуб, митап. Место, куда можно приходить без предварительной договорённости.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Вокал раз/нед</div>
+          <div class="when"><b>Когда:</b> фикс. день, преподаватель</div>
+          <div class="how"><b>Как:</b> запись в школу с регулярным расписанием — важнее чем «когда захочется». Сразу платишь за месяц.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Друзья раз/нед</div>
+          <div class="when"><b>Когда:</b> воскресный обед / пятничный вечер</div>
+          <div class="how"><b>Как:</b> повторяющийся слот с 2–3 близкими работает лучше, чем «надо как-нибудь созвониться».</div>
+        </div>
+      </div>
+      <div class="success"><b>Критерий успеха:</b> в неделе 4 фиксированных социальных/культурных слота. Чтение каждый вечер.</div>
+    </div>
+  </section>
+
+  <!-- 11 / Phase 4 -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1521119989659-a83eee488004?w=1920&q=80')">
+    <div class="brand">ФАЗА 4 · НЕДЕЛИ 13–16</div>
+    <div class="slide-num">11 / 16</div>
+    <div class="slide-content">
+      <span class="phase-tag">Фаза 4 · нед 13–16</span>
+      <h2>Кофе и <span class="accent">нетворкинг</span></h2>
+      <p class="lead">Закрываем две самые тяжёлые привычки: отказ от кофе и активный нетворкинг. Обе требуют ресурса, которого в начале нет.</p>
+      <div class="phase-goal">
+        <div class="lbl">Цель фазы</div>
+        Полностью убрать кофеин, выйти на квоту 2 новых знакомства/нед.
+      </div>
+      <div class="adds">
+        <div class="add-item">
+          <div class="name">2 новых знакомства/нед</div>
+          <div class="when"><b>Когда:</b> привязать к соц месту + митапам + LinkedIn</div>
+          <div class="how"><b>Как:</b> знакомство = 20-мин разговор + обмен контактами + 1 follow-up. Квота: 2/нед. Трекать в табличке с датой и follow-up.</div>
+        </div>
+        <div class="add-item">
+          <div class="name">Отказ от кофе</div>
+          <div class="when"><b>Когда:</b> постепенная замена, 4 недели</div>
+          <div class="how"><b>Как:</b> нед 13: 1 чашка/день утром. Нед 14: полчашки + матча. Нед 15: только матча/цикорий. Нед 16: 0. Синдром отмены 3–7 дней.</div>
+        </div>
+      </div>
+      <div class="success"><b>Критерий успеха:</b> 16 недель — все 17 привычек на месте, идентичность сменилась с «я хочу» на «я тот, кто».</div>
+    </div>
+  </section>
+
+  <!-- 12 / Set & forget -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=1920&q=80')">
+    <div class="brand">SET &amp; FORGET · DAY 1</div>
+    <div class="slide-num">12 / 16</div>
+    <div class="slide-content">
+      <div class="eyebrow">2 ПРИВЫЧКИ · РАЗОВАЯ НАСТРОЙКА</div>
+      <h2>Сделать <span class="accent">в день 1</span> и забыть</h2>
+      <p>Эти ритуалы не требуют системности — только разовой настройки в календаре.</p>
+      <div class="sf-grid">
+        <div class="sf-card">
+          <div class="icon-tag">→ Здоровье</div>
+          <h3>Чекап раз в полгода</h3>
+          <p>Поставь повторяющееся событие в календарь на 6 и 12 месяцев. Запись к терапевту + базовая лаборатория. 2 часа в полгода — самая высокая ROI-инвестиция в тело.</p>
+        </div>
+        <div class="sf-card">
+          <div class="icon-tag">→ Восстановление</div>
+          <h3>Путешествие 2×/год</h3>
+          <p>Забронируй 2 окна в календаре сейчас (например май и октябрь). Конкретное место решишь позже — но даты защищены от работы и встреч.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 / How to track -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80')">
+    <div class="brand">КАК ТРЕКАТЬ</div>
+    <div class="slide-num">13 / 16</div>
+    <div class="slide-content">
+      <div class="eyebrow">МИНИМАЛЬНАЯ СИСТЕМА</div>
+      <h2>Простой чек-лист <span class="accent">текущей фазы</span></h2>
+      <div class="two-cols">
+        <div class="col-card">
+          <h3>Дневная петля</h3>
+          <ul>
+            <li>Чек-лист только для активной фазы — не для всех 17</li>
+            <li>Вечерний чек встроен в планирование следующего дня</li>
+            <li>Чек-боксы &gt; подробные логи, особенно в первые 2 месяца</li>
+            <li>Notion / Obsidian / бумажный блокнот — что не вызывает трения</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <h3>Воскресный ревью</h3>
+          <ul>
+            <li>Что получилось — закрепляем</li>
+            <li>Что слетело — почему именно (триггер, не «лень»)</li>
+            <li>Корректировка следующей недели — без вины</li>
+            <li>Если фаза не идёт 2 недели подряд — переходить рано</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 / Failure mode -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1542728928-1413d1894ed1?w=1920&q=80')">
+    <div class="brand">ПРИ СРЫВАХ</div>
+    <div class="slide-num">14 / 16</div>
+    <div class="slide-content">
+      <div class="eyebrow">КОГДА СЛЕТАЕТ — А ОНО СЛЕТИТ</div>
+      <h2>Один пропуск — норма.<br>Второй подряд — <span class="accent">сигнал</span></h2>
+      <div class="two-cols">
+        <div class="col-card">
+          <h3>Правило</h3>
+          <ul>
+            <li>«Никогда не пропускай дважды» — главное правило</li>
+            <li>Пропуск ≠ провал. Возвращайся в тот же день, не «с понедельника»</li>
+            <li>Не наказывай и не компенсируй удвоением — это убивает систему</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <h3>Если регулярно слетает</h3>
+          <ul>
+            <li>Привычка слишком большая — урезать до tiny start</li>
+            <li>Якорь не работает — поменять на другое существующее действие</li>
+            <li>Цель чужая — может это social pressure, а не твой выбор</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 / Honest warnings -->
+  <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=1920&q=80')">
+    <div class="brand">ЧЕСТНО</div>
+    <div class="slide-num">15 / 16</div>
+    <div class="slide-content">
+      <div class="eyebrow">РИСКИ, О КОТОРЫХ НИКТО НЕ ПИШЕТ</div>
+      <h2>Где этот план <span class="accent">сломается</span></h2>
+      <div class="warning-box">
+        <h3>3 часа/день на свой проект</h3>
+        <p><b>Самая рискованная цель в списке.</b> При позиции head of platform engineering физически возможна, только если: (1) работа не требует овертаймов, (2) проект имеет внутреннюю мотивацию, (3) утро защищено от срочных встреч.</p>
+        <p><b>Кофе.</b> Синдром отмены — 3–7 дней с головными болями и падением энергии. Не пытайся в период высокой рабочей нагрузки или дедлайнов.</p>
+        <p><b>2 знакомства/нед.</b> Это 100+ новых людей в год. Реалистично только если есть регулярные поводы (митапы, профсообщества). Без поводов — искусственно, быстро выгорает.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 / Final -->
+  <section class="slide final" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80')">
+    <div class="brand">FINAL · THE TRUTH</div>
+    <div class="slide-num">16 / 16</div>
+    <div class="slide-content">
+      <div class="eyebrow">ИДЕНТИЧНОСТЬ &gt; ЦЕЛЬ</div>
+      <h1>Ты не <span class="accent">хочешь</span><br>17 привычек.</h1>
+      <h1 style="margin-top: 20px;">Ты <span class="accent">становишься</span><br>тем, у кого они есть.</h1>
+      <p class="quote">Через 16 недель цель «иметь привычки» исчезнет — потому что без них уже неудобно.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="hint">
+  <kbd>←</kbd> <kbd>→</kbd> или <kbd>space</kbd>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn" id="prev">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="next">→</button>
+</nav>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  const dots = document.getElementById('dots');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dots.appendChild(dot);
+  });
+
+  function goTo(i) {
+    if (i < 0 || i >= total) return;
+    slides[current].classList.remove('active');
+    dots.children[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots.children[current].classList.add('active');
+    progress.style.width = ((current + 1) / total * 100) + '%';
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault(); goTo(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault(); goTo(current - 1);
+    } else if (e.key === 'Home') { goTo(0); }
+      else if (e.key === 'End') { goTo(total - 1); }
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+  });
+
+  progress.style.width = (1 / total * 100) + '%';
+  prevBtn.disabled = true;
+
+  document.getElementById('pdfBtn').addEventListener('click', () => {
+    slides.forEach(s => s.classList.add('active'));
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        slides.forEach((s, i) => { if (i !== current) s.classList.remove('active'); });
+      }, 500);
+    }, 100);
+  });
+</script>
+
+</body>
+</html>
